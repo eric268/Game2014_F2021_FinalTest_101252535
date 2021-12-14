@@ -70,6 +70,8 @@ public class PlayerBehaviour : MonoBehaviour
     private SpriteRenderer m_spriteRenderer;
     private Animator m_animator;
     private RaycastHit2D groundHit;
+
+    bool sKeyIsPressed;
     
 
     // Start is called before the first frame update
@@ -169,7 +171,8 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (!isJumping && !isCrouching)
             {
-                if (joystick.Horizontal > joystickHorizontalSensitivity)
+                float x = Input.GetAxisRaw("Horizontal");
+                if (joystick.Horizontal > joystickHorizontalSensitivity || x > 0)
                 {
                     // move right
                     m_rigidBody2D.AddForce(Vector2.right * horizontalForce * Time.deltaTime);
@@ -187,7 +190,7 @@ public class PlayerBehaviour : MonoBehaviour
 
                     m_animator.SetInteger("AnimState", (int)PlayerAnimationType.RUN);
                 }
-                else if (joystick.Horizontal < -joystickHorizontalSensitivity)
+                else if (joystick.Horizontal < -joystickHorizontalSensitivity || x < 0)
                 {
                     // move left
                     m_rigidBody2D.AddForce(Vector2.left * horizontalForce * Time.deltaTime);
@@ -210,8 +213,8 @@ public class PlayerBehaviour : MonoBehaviour
                     m_animator.SetInteger("AnimState", (int)PlayerAnimationType.IDLE);
                 }
             }
-
-            if ((joystick.Vertical > joystickVerticalSensitivity) && (!isJumping))
+            float jump = Input.GetAxisRaw("Jump");
+            if ((joystick.Vertical > joystickVerticalSensitivity) && (!isJumping) || jump > 0 && (!isJumping))
             {
                 // jump
                 m_rigidBody2D.AddForce(Vector2.up * verticalForce);
