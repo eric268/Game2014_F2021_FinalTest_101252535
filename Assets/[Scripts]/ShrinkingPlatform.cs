@@ -98,6 +98,7 @@ public class ShrinkingPlatform : MonoBehaviour
         //need this cause OnCollisionExit2D will not detect leaving collision when it turns to 0
         if (transform.localScale.x == 0)
         {
+            audioSources[(int)ShrinkState.SHRINKING].Stop();
             isColliding = false;
             StartCoroutine(Disappeared());
         }
@@ -125,6 +126,7 @@ public class ShrinkingPlatform : MonoBehaviour
         }
         //Want to ensure that we get back to exact starting value
         transform.localScale = new Vector3(startingWidthScale, transform.localScale.y, transform.localScale.z);
+        audioSources[(int)ShrinkState.EXPANDING].Stop();
 
     }
 
