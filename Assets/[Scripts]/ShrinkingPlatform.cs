@@ -136,6 +136,7 @@ public class ShrinkingPlatform : MonoBehaviour
         int layer = collision.gameObject.layer;
         if ((layer == layer << playerLayerMask.value) && collision.contacts[0].normal == Vector2.down)
         {
+            Debug.Log(collision.contacts[0].normal);
             if (!isColliding)
             {
                 isColliding = true;
@@ -148,7 +149,7 @@ public class ShrinkingPlatform : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         int layer = collision.gameObject.layer;
-        if ((layer == layer << playerLayerMask.value))
+        if ((layer == layer << playerLayerMask.value) && isColliding)
         {
             ExpandPlatform();
         }
