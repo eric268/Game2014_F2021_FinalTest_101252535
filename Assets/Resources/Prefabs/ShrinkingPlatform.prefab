@@ -49,7 +49,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.45, y: 2.17}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -77,13 +77,16 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 4096
+  rigidBody: {fileID: 0}
   startingWidthScale: 0
   expandSpeed: 0.5
   isColliding: 0
-  collider: {fileID: 0}
   audioSources:
   - {fileID: 3244012617317141638}
   - {fileID: 8741546155410400853}
+  floatDistance: 0.5
+  floatSpeed: 0.2
+  direction: 1
 --- !u!82 &3244012617317141638
 AudioSource:
   m_ObjectHideFlags: 0
@@ -301,7 +304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3558412681113584797}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.42, y: 2.67, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4116085608478331072}
@@ -384,7 +387,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7699636527646429266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.42, y: 1.71, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4116085608478331072}
