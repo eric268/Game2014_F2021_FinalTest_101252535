@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ShrinkState
+{
+    EXPANDING,
+    SHRINKING,
+}
+
+
 public class ShrinkingPlatform : MonoBehaviour
 {
     public LayerMask playerLayerMask;
     public float startingWidthScale;
     public float expandSpeed;
     public bool isColliding;
-    public Collider2D collider;
+    public AudioSource[] audioSources;
+
     // Start is called before the first frame update
     void Start()
     {
-        collider = GetComponent<BoxCollider2D>();
         startingWidthScale = transform.localScale.x;
     }
 
@@ -45,6 +52,7 @@ public class ShrinkingPlatform : MonoBehaviour
 
     IEnumerator Shrink()
     {
+        PlaySound(ShrinkState.SHRINKING);
         while (transform.localScale.x > 0)
         {
             if (!isColliding)
@@ -68,6 +76,7 @@ public class ShrinkingPlatform : MonoBehaviour
     IEnumerator Expand()
     {
         yield return new WaitForSecondsRealtime(0.1f);
+        PlaySound(ShrinkState.EXPANDING);
         isColliding = false;
         while (transform.localScale.x < startingWidthScale)
         {
@@ -102,5 +111,27 @@ public class ShrinkingPlatform : MonoBehaviour
         {
             ExpandPlatform();
         }
+    }
+
+    private void PlaySound(ShrinkState state)
+    {
+        switch (state)
+        {
+            case ShrinkState.EXPANDING:
+                audioSources[(int)ShrinkState.SHRINKING].Stop();
+                if (!audioSources[(int)ShrinkState.EXPANDING].isPlaying)
+                {
+                    audioSources[(int)ShrinkState.EXPANDING].Play();
+                }
+                break;
+            case ShrinkState.SHRINKING:
+                audioSources[(int)ShrinkState.EXPANDING].Stop();
+                if (!audioSources[(int)ShrinkState.SHRINKING].isPlaying)
+                {
+                    audioSources[(int)ShrinkState.SHRINKING].Play();
+                }
+                break;
+        }
+
     }
 }
